@@ -13,11 +13,9 @@ public:
     this->setPosition(sf::Vector2f(x, y));
     setAttributes();
   }
-  Circle(const Circle &other, int i /* To make this not be a copy constructor */) : sf::CircleShape(other.getRadius() / 4), prevRadius{other.getRadius()}
+  Circle(const Circle &other, const sf::RectangleShape &rotatingLine) : sf::CircleShape(other.getRadius() / 4), prevRadius{other.getRadius()}
   {
-    (void)i;
-    std::cout << "HERE" << std::endl;
-    this->setPosition(sf::Vector2f(other.getPosition().x + other.getRadius(), other.getPosition().y));
+    updatePosition(rotatingLine);
     setAttributes();
   }
 

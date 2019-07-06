@@ -13,12 +13,13 @@ public:
   }
   void updatePosition(const RotatingLine &prevRotatingLine, const Circle &prevCircle)
   {
-    this->setPosition(prevCircle.getPosition().x + prevRadius + prevRadius * cos(prevRotatingLine.getRotation() * PI / 180), HEIGHT / 2 + prevRadius * sin(prevRotatingLine.getRotation() * PI / 180.0));
+    this->setPosition(prevCircle.getPosition().x + prevRadius + prevRadius * cos(prevRotatingLine.getRotation() * PI / 180), prevCircle.getPosition().y + prevRadius + prevRadius * sin(prevRotatingLine.getRotation() * PI / 180.0));
   }
 
   void updateRotation(const uint32_t &n, const double &theta)
   {
-    this->setRotation(((4 * cos(n * theta)) / n * PI) + ((4 * sin(n * theta)) / n * PI));
+    this->rotate(n*theta);
+    //this->setRotation(((4 * cos(n * theta)) / n * PI) + ((4 * sin(n * theta)) / n * PI));
   }
 
 private:

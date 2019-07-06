@@ -33,7 +33,7 @@ int main()
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Fourier");
   window.setFramerateLimit(60);
 
-  double theta = 0.0;
+  double theta = 1.0;
 
   std::vector<Circle> circles;
   std::vector<RotatingLine> rotatingLines;
@@ -41,14 +41,13 @@ int main()
 
   // Create main circle
   circles.push_back(Circle(RADIUS_MAIN, WIDTH / 2 - WIDTH / 3 - RADIUS_MAIN, HEIGHT / 2 - RADIUS_MAIN));
+  // Create main rotating line
   rotatingLines.push_back(RotatingLine(circles.at(0)));
-  // Create rotating line
-  for (size_t i = 1; i < 3; ++i)
-  {
-    // Create second circle
-    circles.push_back(Circle(circles.at(i - 1), 0));
 
-    // Create second rotating line
+  // Create as many circles as you want
+  for (size_t i = 1; i < 4; ++i)
+  {
+    circles.push_back(Circle(circles.at(i - 1), rotatingLines.at(i - 1)));
     rotatingLines.push_back(RotatingLine(circles.at(i), circles.at(i - 1).getRadius()));
   }
 
@@ -103,9 +102,9 @@ int main()
     }
     window.draw(*connectingLine.get());
 
+    // Render graph
     render(window, output);
     window.display();
-    theta += 0.1;
   }
 
   return 0;
