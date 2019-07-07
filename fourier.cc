@@ -28,6 +28,25 @@ void updateOutput(std::vector<std::unique_ptr<sf::Shape>> &output)
                std::end(output));
 }
 
+void updatePositionAndRotation(std::vector<Circle> &circles, std::vector<RotatingLine> &rotatingLines, double& theta)
+{
+  for (size_t i = 0; i < rotatingLines.size(); ++i)
+  {
+    uint32_t n = i * 2 + 1;
+    rotatingLines.at(i).updateRotation(n, theta);
+  }
+
+  for (size_t i = 1; i < circles.size(); ++i)
+  {
+    circles.at(i).updatePosition(rotatingLines.at(i - 1));
+  }
+
+  for (size_t i = 1; i < rotatingLines.size(); ++i)
+  {
+    rotatingLines.at(i).updatePosition(rotatingLines.at(i - 1), circles.at(i - 1));
+  }
+}
+
 int main()
 {
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Fourier");
@@ -62,24 +81,28 @@ int main()
     {
       if (event.type == sf::Event::Closed)
         window.close();
+
+      if (event.type == sf::Event::KeyPressed)
+      {
+        // Can add and remove circles dynamically
+        if (event.key.code == sf::Keyboard::Left)
+        {
+          if (circles.size() > 1)
+          {
+            circles.pop_back();
+            rotatingLines.pop_back();
+          }
+        }
+        if (event.key.code == sf::Keyboard::Right)
+        {
+          circles.push_back(Circle(circles.at(circles.size() - 1), rotatingLines.at(rotatingLines.size() - 1)));
+          rotatingLines.push_back(RotatingLine(circles.at(circles.size() - 1), circles.at(circles.size() - 2).getRadius()));
+        }
+      }
     }
     window.clear();
 
-    for (size_t i = 0; i < rotatingLines.size(); ++i)
-    {
-      uint32_t n = i * 2 + 1;
-      rotatingLines.at(i).updateRotation(n, theta);
-    }
-
-    for (size_t i = 1; i < circles.size(); ++i)
-    {
-      circles.at(i).updatePosition(rotatingLines.at(i - 1));
-    }
-
-    for (size_t i = 1; i < rotatingLines.size(); ++i)
-    {
-      rotatingLines.at(i).updatePosition(rotatingLines.at(i - 1), circles.at(i - 1));
-    }
+    updatePositionAndRotation(circles, rotatingLines, theta);
 
     connectingLine->setPosition(sf::Vector2f(rotatingLines.at(rotatingLines.size() - 1).getPosition().x + circles.at(circles.size() - 1).getRadius() * cos(rotatingLines.at(rotatingLines.size() - 1).getRotation() * PI / 180), rotatingLines.at(rotatingLines.size() - 1).getPosition().y + circles.at(circles.size() - 1).getRadius() * sin(rotatingLines.at(rotatingLines.size() - 1).getRotation() * PI / 180)));
     // Sets length of connecting according to length between center and circle
