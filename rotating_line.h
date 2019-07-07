@@ -15,6 +15,7 @@ public:
   {
     this->setPosition(prevCircle.getPosition().x + prevRadius + prevRadius * cos(prevRotatingLine.getRotation() * PI / 180), prevCircle.getPosition().y + prevRadius + prevRadius * sin(prevRotatingLine.getRotation() * PI / 180.0));
   }
+  RotatingLine(const RotatingLine& other) = default;
 
   void updateRotation(const uint32_t &n, const double &theta)
   {

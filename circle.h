@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "define.h"
-#include <iostream>
 
 #ifndef CIRCLE_H
 #define CIRCLE_H
@@ -18,6 +17,7 @@ public:
     updatePosition(rotatingLine);
     setAttributes();
   }
+  Circle(const Circle& other) = default;
 
   void setAttributes()
   {
