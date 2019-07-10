@@ -50,6 +50,7 @@ void updatePositionAndRotation(std::vector<Circle> &circles, std::vector<Rotatin
 int main()
 {
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Fourier");
+  window.setPosition(sf::Vector2i(sf::VideoMode::getDesktopMode().width / 2 - WIDTH / 2 ,sf::VideoMode::getDesktopMode().height / 2 - HEIGHT / 2));
   window.setFramerateLimit(60);
 
   double theta = 1.0;
