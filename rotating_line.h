@@ -11,7 +11,7 @@ public:
   {
     this->setPosition(sf::Vector2f(circle.getPosition().x + circle.getRadius() + prevRadius, circle.getPosition().y + circle.getRadius()));
   }
-  void updatePosition(const RotatingLine &prevRotatingLine, const Circle &prevCircle)
+  void updatePosition(const RotatingLine &prevRotatingLine, const sf::CircleShape &prevCircle)
   {
     this->setPosition(prevCircle.getPosition().x + prevRadius + prevRadius * cos(prevRotatingLine.getRotation() * PI / 180), prevCircle.getPosition().y + prevRadius + prevRadius * sin(prevRotatingLine.getRotation() * PI / 180.0));
   }
