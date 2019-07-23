@@ -1,5 +1,6 @@
 #include "define.h"
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 #ifndef CIRCLE_H
 #define CIRCLE_H

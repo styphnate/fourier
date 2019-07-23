@@ -1,5 +1,6 @@
 #include "define.h"
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 #ifndef ROTATING_LINE_H
 #define ROTATING_LINE_H
