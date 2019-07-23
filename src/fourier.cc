@@ -1,6 +1,6 @@
-#include "circle.h"
-#include "define.h"
-#include "rotating_line.h"
+#include "../inc/circle.h"
+#include "../inc/define.h"
+#include "../inc/rotating_line.h"
 #include <SFML/Graphics.hpp>
 #include <algorithm>
 #include <iostream>
