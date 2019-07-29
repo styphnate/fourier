@@ -53,7 +53,7 @@ int main() {
   // Create main circle
   circles.push_back(Circle(RADIUS_MAIN, WIDTH / 2 - WIDTH / 3 - RADIUS_MAIN, HEIGHT / 2 - RADIUS_MAIN));
   // Create main rotating line
-  rotatingLines.push_back(RotatingLine(circles.at(0)));
+  rotatingLines.push_back(RotatingLine(circles.at(0), 0));
 
   // Create as many circles as you want
   for (size_t i = 1; i < 4; ++i) {
